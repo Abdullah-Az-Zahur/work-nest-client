@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import login from '../../assets/images/login.jpg'
+import login from "../../assets/images/login.jpg";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
@@ -26,6 +26,30 @@ const Registration = () => {
       await signInWithGoogle();
       toast.success("signin successful");
       navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
+
+  // Sign Up
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const pass = form.password.value;
+    console.log(email, name, photo, pass);
+    try {
+      const result = await createUser(email, pass);
+      console.log(result);
+      await updateUserProfile(name, photo);
+      
+      // locally stored photo and name for seeing photo and name instant after login
+      setUser({ ...user, photoURL: photo, displayName: name });
+      navigate("/");
+      toast.success("Sign Up SuccessFul");
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
@@ -83,7 +107,7 @@ const Registration = () => {
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleSignUp}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
