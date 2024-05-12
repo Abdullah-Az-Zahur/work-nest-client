@@ -1,15 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+
 import Carousel from "../../components/Carousel";
 import TabCategories from "../../components/TabCategories";
 
 const Home = () => {
-    const jobs = useLoaderData();
-    console.log(jobs)
+    
     return (
         <div className="container mx-auto">
             <Carousel></Carousel>
             <TabCategories
-            jobs={jobs}
             ></TabCategories>
         </div>
     );
