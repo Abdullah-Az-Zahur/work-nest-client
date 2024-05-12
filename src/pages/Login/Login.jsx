@@ -1,21 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import login from '../../assets/images/login.jpg'
-import { useContext } from "react";
+import login from "../../assets/images/login.jpg";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
-
+  const location = useLocation();
+  const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
+  const from = location.state || "/";
   // Google sign in
   const handleGoogleSignin = async () => {
     try {
       await signInWithGoogle();
       toast.success("signin successful");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
@@ -32,23 +37,23 @@ const Login = () => {
     try {
       const result = await signIn(email, pass);
       console.log(result);
-      navigate('/')
-      toast.success('Sign in Successful')
+      navigate(from, { replace: true });
+      toast.success("Sign in Successful");
     } catch (err) {
       console.log(err);
-      toast.error(err?.message)
+      toast.error(err?.message);
     }
   };
-
+  if (user || loading) return;
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)]">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div
-            className='hidden bg-cover bg-center lg:block lg:w-1/2'
-            style={{
-              backgroundImage: `url(${login})`,
-            }}
-          ></div>
+          className="hidden bg-cover bg-center lg:block lg:w-1/2"
+          style={{
+            backgroundImage: `url(${login})`,
+          }}
+        ></div>
 
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2 mx-auto">
           <div className="flex justify-center mx-auto">

@@ -18,6 +18,7 @@ const UpdateJob = () => {
     min_price,
     max_price,
     description,
+    jobPhotoURL,
   } = job || {};
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date(deadline) || new Date());
@@ -144,6 +145,18 @@ const UpdateJob = () => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
+          </div>
+          <div>
+            <label className="text-gray-700 " htmlFor="jobPhotoURL">
+              Job Photo URL
+            </label>
+            <input
+              id="jobPhotoURL"
+              name="jobPhotoURL"
+              defaultValue={jobPhotoURL}
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+            />
           </div>
           <div className="flex flex-col gap-2 mt-4">
             <label className="text-gray-700 " htmlFor="description">

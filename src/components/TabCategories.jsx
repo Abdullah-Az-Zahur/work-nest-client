@@ -26,23 +26,14 @@ const TabCategories = () => {
           </div>
           <div className="flex items-center justify-center">
             <TabList>
-              <Tab>All Jobs</Tab>
               <Tab>On Site Job</Tab>
               <Tab>Remote Job</Tab>
               <Tab>Hybrid Job</Tab>
               <Tab>Part Time Job</Tab>
+              <Tab>All Jobs</Tab>
             </TabList>
           </div>
 
-          <TabPanel>
-            <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {jobs
-                // eslint-disable-next-line react/prop-types
-                .map((job) => (
-                  <JobCard key={job._id} job={job} />
-                ))}
-            </div>
-          </TabPanel>
           <TabPanel>
             <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {jobs
@@ -78,6 +69,15 @@ const TabCategories = () => {
               {jobs
                 // eslint-disable-next-line react/prop-types
                 .filter((j) => j.category === "Part Time")
+                .map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {jobs
+                // eslint-disable-next-line react/prop-types
                 .map((job) => (
                   <JobCard key={job._id} job={job} />
                 ))}

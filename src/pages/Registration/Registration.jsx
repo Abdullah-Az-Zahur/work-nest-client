@@ -1,31 +1,35 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import login from "../../assets/images/login.jpg";
+import toast from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import toast from "react-hot-toast";
 
 const Registration = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
+  const { signInWithGoogle, createUser, updateUserProfile, user, setUser, loading } =
+    useContext(AuthContext);
 
-  const {
-    user,
-    setUser,
-    loading,
-    setLoading,
-    createUser,
-    signIn,
-    signInWithGoogle,
-    logOut,
-    updateUserProfile,
-  } = useContext(AuthContext);
+  // const {
+  //   user,
+  //   setUser,
+  //   loading,
+  //   setLoading,
+  //   createUser,
+  //   signIn,
+  //   signInWithGoogle,
+  //   logOut,
+  //   updateUserProfile,
+  // } = useContext(AuthContext);
 
   // Google sign in
   const handleGoogleSignin = async () => {
     try {
       await signInWithGoogle();
       toast.success("signin successful");
-      navigate("/");
+      navigate(from, { replace: true })
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
@@ -45,17 +49,17 @@ const Registration = () => {
       const result = await createUser(email, pass);
       console.log(result);
       await updateUserProfile(name, photo);
-      
+
       // locally stored photo and name for seeing photo and name instant after login
       setUser({ ...user, photoURL: photo, displayName: name });
-      navigate("/");
+      navigate(from, { replace: true })
       toast.success("Sign Up SuccessFul");
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
     }
   };
-
+  if (user || loading) return;
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
