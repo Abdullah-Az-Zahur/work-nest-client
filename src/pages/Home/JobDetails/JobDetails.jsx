@@ -13,16 +13,15 @@ const JobDetails = () => {
   const job = useLoaderData();
   console.log(job);
   const {
-    category,
-    title,
-    description,
     _id,
-    jobPhotoURL,
-    currentTime,
+    job_title,
+    description,
     min_price,
     max_price,
+    category,
     deadline,
     buyer,
+    jobPhotoURL,
   } = job || {};
 
   //   handle form
@@ -35,7 +34,7 @@ const JobDetails = () => {
     const price = parseFloat(form.price.value);
     if (price < parseFloat(min_price))
       return toast.error("Offer more or at least equal to Minimum Price.");
-    const comment = form.comment.value;
+    const resume = form.resume.value;
     const deadline = startDate;
     const email = user?.email;
     const status = "Pending";
@@ -44,12 +43,13 @@ const JobDetails = () => {
       jobId,
       price,
       deadline,
-      comment,
-      title: title,
+      job_title,
       category,
       email,
-      buyer,
+      buyer_email: buyer?.email,
       status,
+      buyer,
+      resume,
     };
     try {
       const { data } = await axios.post(
@@ -58,7 +58,7 @@ const JobDetails = () => {
       );
       console.log(data);
       toast.success("Applied Successfully!");
-      navigate("/my-bids");
+      navigate("/my-applies");
     } catch (err) {
       toast.success(err.response.data);
       e.target.reset();
@@ -90,7 +90,7 @@ const JobDetails = () => {
 
         <div>
           <h1 className="mt-2 text-3xl font-semibold text-gray-800 ">
-            {title}
+            {job_title}
           </h1>
 
           <p className="mt-2 text-lg text-gray-600 ">{description}</p>
@@ -150,12 +150,12 @@ const JobDetails = () => {
             </div>
 
             <div>
-              <label className="text-gray-700 " htmlFor="comment">
+              <label className="text-gray-700 " htmlFor="resume">
                 Resume Link
               </label>
               <input
-                id="comment"
-                name="comment"
+                id="resume"
+                name="resume"
                 type="text"
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
