@@ -27,11 +27,9 @@ const BidRequests = () => {
     },
     onSuccess: () => {
       console.log("data updated");
-      toast.success("Updated");
-      // refresh ui for latest data
-      // refetch()
+      toast.success("Status Update Successfully");
 
-      // Hard
+      // refresh ui for latest data
       queryClient.invalidateQueries({ queryKey: ["bids"] });
     },
   });
