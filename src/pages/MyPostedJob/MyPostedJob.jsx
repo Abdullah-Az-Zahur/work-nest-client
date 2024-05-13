@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -9,16 +8,6 @@ const MyPostedJobs = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
   const axiosSecure = useAxiosSecure();
-
-  //   useEffect(() => {
-  //     const getData = async () => {
-  //       const { data } = await axios(
-  //         `${import.meta.env.VITE_API_URL}/jobs/${user?.email}`
-  //       );
-  //       setJobs(data);
-  //     };
-  //     getData();
-  //   }, [user]);
 
   useEffect(() => {
     getData();
