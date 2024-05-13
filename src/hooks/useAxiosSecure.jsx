@@ -9,7 +9,6 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
-  // interceptor
 
   //   Response Interceptor
   axiosSecure.interceptors.response.use(
@@ -25,9 +24,6 @@ const useAxiosSecure = () => {
       return Promise.reject(error);
     }
   );
-
-  //   Request Interceptor
-  //   axios.interceptors.request
 
   return axiosSecure;
 };
