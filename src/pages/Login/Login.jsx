@@ -4,6 +4,7 @@ import login from "../../assets/images/login.jpg";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,11 +16,20 @@ const Login = () => {
     }
   }, [navigate, user]);
   const from = location.state || "/";
+
   // Google sign in
   const handleGoogleSignin = async () => {
     try {
-      await signInWithGoogle();
-      toast.success("signin successful");
+      const result = await signInWithGoogle();
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      toast.success("Signin Successful");
       navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
@@ -35,10 +45,19 @@ const Login = () => {
     const pass = form.password.value;
     console.log(email, pass);
     try {
+      //User Login
       const result = await signIn(email, pass);
-      console.log(result);
+      console.log(result.user);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
       navigate(from, { replace: true });
-      toast.success("Sign in Successful");
+      toast.success("Signin Successful");
     } catch (err) {
       console.log(err);
       toast.error(err?.message);

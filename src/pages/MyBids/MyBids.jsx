@@ -4,7 +4,6 @@ import axios from "axios";
 
 const MyBids = () => {
   const { user } = useAuth();
-
   const [bids, setBids] = useState([]);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const MyBids = () => {
   // handleStatus
     const handleStatus = async (id, status) => {
       const { data } = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/my-bids/${id}`,
+        `${import.meta.env.VITE_API_URL}/bid/${id}`,
         { status }
       );
       console.log(data);
