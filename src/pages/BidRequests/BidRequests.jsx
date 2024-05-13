@@ -1,36 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const BidRequests = () => {
   const { user } = useAuth();
-  const [bids, setBids] = useState([]);
-
-  useEffect(() => {
-    getData();
-  }, [user]);
+  const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
+  const { data: bids = [], isLoading } = useQuery({
+    queryFn: () => getData(),
+    queryKey: ["bids", user?.email],
+  });
 
   const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/bid-requests/${user?.email}`
-    );
-    setBids(data);
+    const { data } = await axiosSecure(`/bid-requests/${user?.email}`);
+    return data;
   };
   console.log(bids);
 
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({ id, status }) => {
+      const { data } = await axiosSecure.patch(`/bid/${id}`, { status });
+      console.log(data);
+      return data;
+    },
+    onSuccess: () => {
+      console.log("data updated");
+      toast.success("Updated");
+      // refresh ui for latest data
+      // refetch()
+
+      // Hard
+      queryClient.invalidateQueries({ queryKey: ["bids"] });
+    },
+  });
+
   // handleStatus
   const handleStatus = async (id, prevStatus, status) => {
-    if (prevStatus === status) return console.log("sorry");
-
     console.log(id, prevStatus, status);
-    const { data } = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/bid/${id}`,
-      { status }
-    );
-    console.log(data);
-    // UI REFRESH , update
-    getData();
+    if (prevStatus === status) return console.log("same status");
+    await mutateAsync({ id, status });
   };
+
+  if (isLoading) return <p>Data loading......</p>;
 
   return (
     <section className="container px-4 mx-auto pt-12">
