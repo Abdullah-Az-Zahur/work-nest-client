@@ -8,7 +8,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const MyPostedJobs = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   //   useEffect(() => {
   //     const getData = async () => {
@@ -25,7 +25,7 @@ const MyPostedJobs = () => {
   }, [user]);
 
   const getData = async () => {
-    const { data } = await axiosSecure(`/jobs/${user?.email}`)
+    const { data } = await axiosSecure(`/jobs/${user?.email}`);
     setJobs(data);
   };
 
@@ -33,9 +33,7 @@ const MyPostedJobs = () => {
 
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/job/${id}`
-      );
+      const { data } = await axiosSecure.delete(`/job/${id}`);
       console.log(data);
       toast.success("Delete Successful");
 
