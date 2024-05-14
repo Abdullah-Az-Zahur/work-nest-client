@@ -25,8 +25,7 @@ const AddJob = () => {
     const max_price = parseFloat(form.max_price.value);
     const description = form.description.value;
     const currentTime = new Date();
-    
-        
+
     const jobData = {
       job_title,
       deadline,
@@ -78,6 +77,19 @@ const AddJob = () => {
 
             <div>
               <label className="text-gray-700 " htmlFor="emailAddress">
+                Name
+              </label>
+              <input
+                id="emailAddress"
+                type="email"
+                name="email"
+                disabled
+                defaultValue={user?.displayName}
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+              />
+            </div>
+            <div>
+              <label className="text-gray-700 " htmlFor="emailAddress">
                 Email Address
               </label>
               <input
@@ -100,24 +112,9 @@ const AddJob = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-2 ">
-              <label className="text-gray-700 " htmlFor="category">
-                Category
-              </label>
-              <select
-                name="category"
-                id="category"
-                className="border p-2 rounded-md"
-              >
-                <option value="On Site">On Site</option>
-                <option value="Remote">Remote</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Part Time">Part Time</option>
-              </select>
-            </div>
             <div>
               <label className="text-gray-700 " htmlFor="min_price">
-                Minimum Price
+                Min Salary
               </label>
               <input
                 id="min_price"
@@ -129,7 +126,7 @@ const AddJob = () => {
 
             <div>
               <label className="text-gray-700 " htmlFor="max_price">
-                Maximum Price
+                Max Salary
               </label>
               <input
                 id="max_price"
@@ -139,17 +136,32 @@ const AddJob = () => {
               />
             </div>
           </div>
+          <div className="flex flex-col gap-2 ">
+            <label className="text-gray-700 " htmlFor="category">
+              Category
+            </label>
+            <select
+              name="category"
+              id="category"
+              className="border p-2 rounded-md "
+            >
+              <option value="On Site">On Site</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Part Time">Part Time</option>
+            </select>
+          </div>
           <div>
-              <label className="text-gray-700 " htmlFor="jobPhotoURL">
+            <label className="text-gray-700 " htmlFor="jobPhotoURL">
               Job Photo URL
-              </label>
-              <input
-                id="jobPhotoURL"
-                name="jobPhotoURL"
-                type="text"
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
-              />
-            </div>
+            </label>
+            <input
+              id="jobPhotoURL"
+              name="jobPhotoURL"
+              type="text"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+            />
+          </div>
           <div className="flex flex-col gap-2 mt-4">
             <label className="text-gray-700 " htmlFor="description">
               Description

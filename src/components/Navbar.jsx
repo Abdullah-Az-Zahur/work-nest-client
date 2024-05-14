@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="navbar-start">
         <Link to="/" className="flex gap-2 items-center">
           <img className="w-auto h-12" src={logo} alt="" />
-          <span className="font-bold">Work Nest</span>
+          <span className="font-bold">Job Nest</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

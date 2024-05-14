@@ -2,6 +2,7 @@
 
 import { Link } from "react-router-dom";
 
+
 const JobCard = ({ job }) => {
   const {
     category,
@@ -12,6 +13,8 @@ const JobCard = ({ job }) => {
     max_price,
     deadline,
     jobPhotoURL,
+    buyer,
+    currentTime,
   } = job || {};
   return (
     <Link
@@ -37,11 +40,14 @@ const JobCard = ({ job }) => {
           {job_title}
         </h1>
 
+        {/* buyer name */}
+        <p className="mt-2 text-sm  text-gray-600 ">Posted By: {buyer?.name}</p>
+        <p className="mt-2 text-sm  text-gray-600 ">Posted Time: {new Date(currentTime).toLocaleDateString()}</p>
         <p title={description} className="mt-2 text-sm text-gray-600 ">
           {description.substring(0, 50)}...
         </p>
         <p className="mt-2 text-sm font-bold text-gray-600 ">
-          Range: ${min_price} - ${max_price}
+        Salary range: ${min_price} - ${max_price}
         </p>
       </div>
     </Link>
