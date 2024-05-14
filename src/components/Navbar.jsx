@@ -21,18 +21,24 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-sm container px-4 mx-auto">
-      <div className="flex-1">
+      <div className="navbar-start">
         <Link to="/" className="flex gap-2 items-center">
           <img className="w-auto h-12" src={logo} alt="" />
           <span className="font-bold">Work Nest</span>
         </Link>
       </div>
-      <div className="flex-none">
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
             <Link to="/">Home</Link>
           </li>
-
+          <li>
+            <Link to="/jobs">All Jobs</Link>
+          </li>
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <ul className="menu menu-horizontal px-1">
           {/* theme control */}
           <div>
             <label className="cursor-pointer grid place-items-center">
