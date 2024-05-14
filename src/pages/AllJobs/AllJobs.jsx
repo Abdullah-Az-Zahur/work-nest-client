@@ -16,14 +16,12 @@ const AllJobs = () => {
       const { data } = await axios(
         `${
           import.meta.env.VITE_API_URL
-        }/jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}`
+        }/all-jobs?page=${currentPage}&size=${itemsPerPage}&filter=${filter}&sort=${sort}&search=${search}`
       )
       setJobs(data)
     }
     getData()
   }, [currentPage, filter, itemsPerPage, search, sort])
-
-  
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axios(
@@ -76,10 +74,9 @@ const AllJobs = () => {
               className='border p-4 rounded-lg'
             >
               <option value=''>Filter By Category</option>
-              <option value="On Site">On Site</option>
-                <option value="Remote">Remote</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Part Time">Part Time</option>
+              <option value='Web Development'>Web Development</option>
+              <option value='Graphics Design'>Graphics Design</option>
+              <option value='Digital Marketing'>Digital Marketing</option>
             </select>
           </div>
 
