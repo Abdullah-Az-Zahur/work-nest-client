@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import useAuth from "../../hooks/useAuth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -27,7 +27,7 @@ const BidRequests = () => {
     },
     onSuccess: () => {
       console.log("data updated");
-      toast.success("Status Update Successfully");
+      toast.success("Status Updated");
 
       // refresh ui for latest data
       queryClient.invalidateQueries({ queryKey: ["bids"] });

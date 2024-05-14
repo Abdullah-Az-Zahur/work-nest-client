@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyBids = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [bids, setBids] = useState([]);
 
   useEffect(() => {
@@ -11,22 +13,21 @@ const MyBids = () => {
   }, [user]);
 
   const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/my-bids/${user?.email}`
-    );
+    const { data } = await axiosSecure(`/my-bids/${user?.email}`);
     setBids(data);
   };
+
   console.log(bids);
 
   // handleStatus
-    const handleStatus = async (id, status) => {
-      const { data } = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/bid/${id}`,
-        { status }
-      );
-      console.log(data);
-      getData();
-    };
+  const handleStatus = async (id, status) => {
+    const { data } = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/bid/${id}`,
+      { status }
+    );
+    console.log(data);
+    getData();
+  };
 
   return (
     <section className="container px-4 mx-auto pt-12">
@@ -105,7 +106,7 @@ const MyBids = () => {
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center gap-x-2">
-                        <p
+                          <p
                             className={`px-3 py-1 ${
                               bid.category === "On Site" &&
                               "text-blue-500 bg-blue-100/60"
