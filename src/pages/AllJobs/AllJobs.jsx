@@ -3,7 +3,7 @@ import axios from 'axios'
 import JobCard from '../../components/JobCard'
 
 const AllJobs = () => {
-  const [itemsPerPage, setItemsPerPage] = useState(6)
+  const [itemsPerPage, setItemsPerPage] = useState(4)
   const [currentPage, setCurrentPage] = useState(1)
   const [count, setCount] = useState(0)
   const [filter, setFilter] = useState('')
@@ -22,7 +22,6 @@ const AllJobs = () => {
     }
     getData()
   }, [currentPage, filter, itemsPerPage, search, sort])
-
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axios(
@@ -35,7 +34,7 @@ const AllJobs = () => {
     }
     getCount()
   }, [filter, search])
-  
+
   console.log(count)
   const numberOfPages = Math.ceil(count / itemsPerPage)
   const pages = [...Array(numberOfPages).keys()].map(element => element + 1)
@@ -76,9 +75,9 @@ const AllJobs = () => {
             >
               <option value=''>Filter By Category</option>
               <option value="On Site">On Site</option>
-                <option value="Remote">Remote</option>
-                <option value="Hybrid">Hybrid</option>
-                <option value="Part Time">Part Time</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Part Time">Part Time</option>
             </select>
           </div>
 

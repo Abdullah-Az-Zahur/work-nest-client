@@ -18,7 +18,6 @@ const AddJob = () => {
     const form = e.target;
     const job_title = form.job_title.value;
     const jobPhotoURL = form.jobPhotoURL.value;
-    const email = form.email.value;
     const deadline = startDate;
     const category = form.category.value;
     const min_price = parseFloat(form.min_price.value);
@@ -36,7 +35,7 @@ const AddJob = () => {
       currentTime,
       jobPhotoURL,
       buyer: {
-        email,
+        email: user?.email,
         name: user?.displayName,
         photo: user?.photoURL,
       },

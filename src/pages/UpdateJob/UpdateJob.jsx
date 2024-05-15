@@ -26,7 +26,6 @@ const UpdateJob = () => {
     e.preventDefault();
     const form = e.target;
     const job_title = form.job_title.value;
-    const email = form.email.value;
     const deadline = startDate;
     const category = form.category.value;
     const min_price = parseFloat(form.min_price.value);
@@ -40,7 +39,7 @@ const UpdateJob = () => {
       max_price,
       description,
       buyer: {
-        email,
+        email: user?.email,
         name: user?.displayName,
         photo: user?.photoURL,
       },
