@@ -1,36 +1,41 @@
 # Job Nest
 
-Job Nest is a user-friendly job-seeking website built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It allows users to post job listings, search for positions categorized as On-Site, Remote, Hybrid, and Part-Time, and apply seamlessly through the platform.
+Job Nest is a user-friendly job-seeking platform built using the MERN stack. It allows users to post job listings, search for positions, and apply seamlessly. The website categorizes jobs into On-Site, Remote, Hybrid, and Part-Time, making it easy for users to find jobs that suit their preferences.
 
 ## Core Features
-- **Job Listings:** Users can view and post job listings categorized into On-Site, Remote, Hybrid, and Part-Time.
-- **Job Search:** Seamless search functionality allows users to find specific job types.
-- **Application Submission:** Users can apply for jobs directly through the website.
-- **Navbar:** Includes the website logo, name, Home, All Jobs, Applied Jobs, Add A Job, My Jobs (jobs created by the user), Blogs, and User Profile.
-- **Conditional Navbar:** Items like User Profile picture, Add A Job, My Jobs, and Applied Jobs appear based on user login status.
-- **Login & Registration:** Secure authentication system using JWT tokens.
-- **Theme Toggling:** Users can switch between different website themes for personalized viewing.
+
+- **Job Listings**: Users can post job listings with detailed descriptions.
+- **Job Categories**: Jobs are categorized into On-Site, Remote, Hybrid, and Part-Time. Users can filter jobs by category.
+- **Job Search and Apply**: Users can search for jobs and apply directly through the platform.
+- **User Authentication**: Secure login and registration system with JWT authentication.
+- **Conditional Navbar**: Displays user profile picture, Add A Job, My Jobs, and Applied Jobs based on login status.
+- **User Profile**: Displays user profile picture and name (on hover) if logged in, otherwise shows a Login button.
+- **Theme Toggling**: Users can switch between light and dark themes.
+- **Blogs**: Section for users to read and post blogs related to job seeking and career advice.
 
 ## Technologies Used
-- **Frontend:** React.js
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT (JSON Web Tokens)
+
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Deployment**: Firebase
 
 ## Live Site
-[Job Nest](https://job-nest-391e1.web.app/)
 
-## Screenshots
-Include screenshots of your website here.
+Check out the live site: [Job Nest](https://job-nest-391e1.web.app/)
 
-## Installation
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Configure environment variables.
-4. Run the development server using `npm start`.
+## Getting Started
 
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request.
+To get a local copy up and running, follow these simple steps:
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+### Prerequisites
+
+- Node.js
+- MongoDB
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Abdullah-Az-Zahur/job-nest.git
